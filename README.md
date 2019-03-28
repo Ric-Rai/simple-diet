@@ -3,7 +3,7 @@ Sovellus mahdollistaa yksinkertaisten ruokavalioiden luomisen. Rekisteröitynyt 
 
 
 
-####[Sovellus Herokussa]()  
+#### [Sovellus Herokussa](https://simple-diet.herokuapp.com/)  
 >**Testitunnukset** \
 >Käyttäjätunnus: test \
 >Salasana: test
