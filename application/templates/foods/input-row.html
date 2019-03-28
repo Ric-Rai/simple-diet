@@ -1,0 +1,27 @@
+<table>
+    {% if form.errors %}
+        <tr id="error-row">
+            {% for field in form %}
+                {% if field.name in form.errors %}
+                    <td class="error">{{ ', '.join(form.errors[field.name]) }}</td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    {% endif %}
+
+    <tr id="input-row" row-id="{{ row_dict['id'] if row_dict }}">
+        {% for field in form %}
+            {% if row_dict %}
+                <td>{{ field(value=row_dict[field.name], class='form-control') }}</td>
+            {% else %}
+                <td>{{ field(class='form-control') }}</td>
+            {% endif %}
+        {% endfor %}
+        <td>
+            <a class="add" title="Tallenna"><i class="material-icons">&#xE03B;</i></a>
+            <a class="delete" title="Poista"><i class="material-icons">&#xE872;</i></a>
+        </td>
+    </tr>
+</table>

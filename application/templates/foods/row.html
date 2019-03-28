@@ -1,0 +1,13 @@
+{% if not rows %}<table>{% endif %}
+
+    <tr row-id="{{ row_dict['id'] }}">
+        {% for key, value in row_dict.items() if not key == 'id' %}
+            <td>{{ value }}</td>
+        {% endfor %}
+        <td>
+            <a class="edit" title="Muokkaa"><i class="material-icons">&#xE254;</i></a>
+            <a class="delete" title="Poista"><i class="material-icons">&#xE872;</i></a>
+        </td>
+    </tr>
+
+{% if not rows %}</table>{% endif %}
