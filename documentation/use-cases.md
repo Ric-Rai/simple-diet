@@ -13,9 +13,8 @@ Käyttöliittymän komponentit on järkevää toteuttaa taulukkomuotoisesti, sil
 ```diff
 + Rekisteröinti ja kirjautuminen on toteutettu
 - Päänäkymä ruokavalion luomiselle puuttuu
-- Ruokien valitseminen listasta on haastavaa toteuttaa käyttäjäystävällisesti. Toimivaa voisi olla käyttää jonkinlaista autocomplete-ominaisuutta ruoan nimeä kirjoitettaessa.
-- Sovellukselle pitäisi pystyä antamaan tiedosto, jonka sisältämistä riveistä ruokataulukkoon luodaan valmiit "perusruoka-aineet".
 ```
+Ruokien valitseminen listasta on haastavaa toteuttaa käyttäjäystävällisesti. Toimivaa voisi olla käyttää jonkinlaista autocomplete-ominaisuutta ruoan nimeä kirjoitettaessa. Sovellukselle pitäisi pystyä antamaan tiedosto, jonka sisältämistä riveistä ruokataulukkoon luodaan valmiit "perusruoka-aineet"
 
 <br>
 
@@ -24,7 +23,7 @@ Käyttöliittymän komponentit on järkevää toteuttaa taulukkomuotoisesti, sil
 - Käyttäjä näkee makroravinnekoostumuksen ja energiamäärän reaaliajassa koostaessaan ruokavaliota.
 
 ```diff
-- Todo: Joka kerta kun ateriaan lisätään ruoka ja määrää, niin ne lähetetään palvelimelle tallennettavaksi. Palvelin vastaa lähettämällä tiedon muuttuneista makroravinne- ja energiamääristä.
+- Puuttuu
 ```
 
 <br>
@@ -45,8 +44,10 @@ Käyttöliittymän komponentit on järkevää toteuttaa taulukkomuotoisesti, sil
 
 - Käyttäjä pystyy helposti yksinkertaisella ja intuitiivisellä tavalla muuttamaan näiden järjetystä.
 
+Jonkinlaiset ylös- ja alaspäin osoittavat nuolet, joita klikkaamalla ateria tai aterian sisältämä ruoka siirtyy taulukossa ylöspäin. Samalla palvelimelle lähetetään tieto muuttuneesta järjestyksestä. Tehokkainta olisi käyttää jotain näppäinyhdistelmää esim. <shift>+<up>/<down>. Tämä vaatisi kuitenkin mahdollisuuden valita rivejä taulukosta. 
+
 ```diff
-- Jonkinlaiset ylös- ja alaspäin osoittavat nuolet, joita klikkaamalla ateria tai aterian sisältämä ruoka siirtyy taulukossa ylöspäin. Samalla palvelimelle lähetetään tieto muuttuneesta järjestyksestä. Tehokkainta olisi käyttää jotain näppäinyhdistelmää esim. <shift>+<up>/<down>. Tämä vaatisi kuitenkin mahdollisuuden valita rivejä taulukosta. 
+- Puuttuu
 ```
 
 <br>
@@ -55,7 +56,9 @@ Käyttöliittymän komponentit on järkevää toteuttaa taulukkomuotoisesti, sil
 
 - Käyttäjä syöttää reseptitaulukkoon reseptin nimen ja sen sisältämät ruoka-aineet ja niiden määrät reseptissä. Reseptinä tallennettua ruokaa voidaan käyttää osana ruokavaliota, kuten mitä tahansa muuta ruoka-ainetaulukon ruokaa.
 
- ```diff
-- Tämä on edityneempi ominaisuus, jonka toteuttamisessa on joitain haasteita. Jotta sovelluksen logiikka pysyy mahdollisimman yksinkertaisena, niin reseptille tulee laskea normaali ravintoainekoostumus 100 g kohden, ja tallentaa se ruoka-ainetaulukkoon, jossa se käyttäytyy kuten normaali ruoka. Eli ruokataulukon ja reseptitaulukon välille syntyy riippuvuus siten, että aina kun reseptitaulukkoa muutetaan, niin myös ruokataulukkoa muutetaan. Tämä tietysti myös denormalisoi tietokantaa. 
+```diff
+- Puuttuu
 ```
+
+Tämä on edityneempi ominaisuus, jonka toteuttamisessa on joitain haasteita. Jotta sovelluksen logiikka pysyy mahdollisimman yksinkertaisena, niin reseptille tulee laskea normaali ravintoainekoostumus 100 g kohden, ja tallentaa se ruoka-ainetaulukkoon, jossa se käyttäytyy kuten normaali ruoka. Eli ruokataulukon ja reseptitaulukon välille syntyy riippuvuus siten, että aina kun reseptitaulukkoa muutetaan, niin myös ruokataulukkoa muutetaan. Tämä tietysti myös denormalisoi tietokantaa.
 
