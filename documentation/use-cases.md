@@ -44,11 +44,11 @@ Ruokien valitseminen listasta on haastavaa toteuttaa käyttäjäystävällisesti
 
 - Käyttäjä pystyy helposti yksinkertaisella ja intuitiivisellä tavalla muuttamaan näiden järjetystä.
 
-Jonkinlaiset ylös- ja alaspäin osoittavat nuolet, joita klikkaamalla ateria tai aterian sisältämä ruoka siirtyy taulukossa ylöspäin. Samalla palvelimelle lähetetään tieto muuttuneesta järjestyksestä. Tehokkainta olisi käyttää jotain näppäinyhdistelmää esim. <shift>+<up>/<down>. Tämä vaatisi kuitenkin mahdollisuuden valita rivejä taulukosta. 
-
 ```diff
 - Puuttuu
 ```
+
+Jonkinlaiset ylös- ja alaspäin osoittavat nuolet, joita klikkaamalla ateria tai aterian sisältämä ruoka siirtyy taulukossa ylöspäin. Samalla palvelimelle lähetetään tieto muuttuneesta järjestyksestä. Tehokkainta olisi käyttää jotain näppäinyhdistelmää esim. shift+up/down. Tämä vaatisi kuitenkin mahdollisuuden valita rivejä taulukosta.
 
 <br>
 
