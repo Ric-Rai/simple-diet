@@ -6,6 +6,8 @@ class User(db.Model):
     __tablename__ = "account"
 
     id = db.Column(db.Integer, primary_key=True)
+    foods = db.relationship("Food", backref='account', lazy=True)
+
     username = db.Column(db.String(144), nullable=False, unique=True)
     password = db.Column(db.String(144), nullable=False)
     name = db.Column(db.String(144), nullable=False)

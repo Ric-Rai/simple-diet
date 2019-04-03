@@ -3,8 +3,7 @@ from application import db
 
 class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-#   account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
-#   created = db.Column(db.DateTime, default=db.func.current_timestamp())
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=True)
 
     name = db.Column(db.String(100), unique=True, nullable=False)
     energy = db.Column(db.Integer, nullable=False)
