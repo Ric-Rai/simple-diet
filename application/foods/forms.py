@@ -10,5 +10,7 @@ class FoodForm(FlaskForm):
     carb = DecimalField("Hiilihydraatti", [NumberRange(min=0, max=100), DataRequired()])
     fat = DecimalField("Rasva", [NumberRange(min=0, max=100), DataRequired()])
 
+#   TODO: make it possible to add foods with 0 nutrient values
+
     class Meta:
         csrf = False

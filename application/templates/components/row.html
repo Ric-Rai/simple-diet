@@ -1,0 +1,23 @@
+{% if not rows %}<table>{% endif %}
+
+<tr row-id="{{ row.id }}">
+    {% for col in row.__table__.columns if not 'id' in col.name %}
+        {% if col.type.python_type.__name__ == 'datetime' %}
+            <td>{{ row[col.name].strftime('%d.%m.%Y %H:%M') }}</td>
+        {% elif col.name == 'name' and anchors %}
+            <td><a href="{{ row.id|string }}">{{ row[col.name] }}</a></td>
+        {% else %}
+            <td>{{ row[col.name] }}</td>
+        {% endif %}
+    {% endfor %}
+    {% if row.account_id %}
+        <td>
+            <a class="edit" title="Muokkaa"><i class="material-icons">&#xE254;</i></a>
+            <a class="delete" title="Poista"><i class="material-icons">&#xE872;</i></a>
+        </td>
+    {% else %}
+        <td></td>
+    {% endif %}
+</tr>
+
+{% if not rows %}</table>{% endif %}

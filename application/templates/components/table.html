@@ -4,26 +4,25 @@
     <div class="table-wrapper">
         <div class="table-title">
             <div class="row">
-                <div class="col-sm-8"><h2>Ruoat</h2></div>
+                <div class="col-sm-8">
+                    <h2>{% if heading %}{{ heading }}{% else %}Otsikko{% endif %}</h2>
+                </div>
                 <div class="col-sm-4">
                     <button id="add-row" type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Lisää uusi</button>
                 </div>
             </div>
         </div>
-        <table id="foods" class="table table-bordered">
+        <table class="{{ table_type }} table table-bordered" type="{{ table_type }}">
             <thead>
             <tr>
-                <th scope="col">Nimi</th>
-                <th scope="col">Energia (kcal)</th>
-                <th scope="col">Proteiini</th>
-                <th scope="col">Hiilihydraatti</th>
-                <th scope="col">Rasva</th>
-                <th scope="col">Toiminnot</th>
+                {% for header in headers %}
+                    <th scope="col">{{ header }}</th>
+                {% endfor %}
             </tr>
             </thead>
             <tbody>
-            {% for row_dict in rows %}
-                {% include "foods/row.html" %}
+            {% for row in rows %}
+                {% include "components/row.html" %}
             {% endfor %}
             </tbody>
         </table>

@@ -1,9 +1,12 @@
+from sqlalchemy import text
+
 from application import db
 
 
 class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=True)
+    mealfood = db.relationship("MealFood", backref='mealfood', lazy=True)
 
     name = db.Column(db.String(100), unique=True, nullable=False)
     energy = db.Column(db.Integer, nullable=False)
@@ -11,11 +14,14 @@ class Food(db.Model):
     carb = db.Column(db.Numeric(scale=2), nullable=False)
     fat = db.Column(db.Numeric(scale=2), nullable=False)
 
-    def __init__(self, name, energy, protein, carb, fat):
-        self.name = name
-        self.energy = energy
-        self.protein = protein
-        self.carb = carb
-        self.fat = fat
+    @staticmethod
+    def count_foods_of_user(user_id):
+        stmt = text("SELECT COUNT(Food.id) FROM Food "
+                    "WHERE (account_id = :user_id)").params(user_id=user_id)
+        res = db.engine.execute(stmt)
 
-#    meals = db.relationship("Meal", backref='meal', lazy=True)
+        response = []
+        for row in res:
+            response.append(row[0])
+
+        return response

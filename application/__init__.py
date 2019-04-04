@@ -26,6 +26,11 @@ from application.foods.models import Food
 from application.auth import models
 from application.auth import views
 
+from application.diets import models
+from application.diets import views
+
+from application.meals import models
+from application.mealfoods import models
 
 from application.auth.models import User
 from os import urandom
@@ -54,7 +59,10 @@ def user_init_values(*args, **kwargs):
 # noinspection PyUnusedLocal
 @event.listens_for(Food.__table__, 'after_create')
 def food_init_values(*args, **kwargs):
-    db.session.add(Food('Vesi', 0, 0.0, 0.0, 0.0))
+    food = Food()
+    food.name = "Vesi"
+    food.energy = food.protein = food.carb = food.fat = 0
+    db.session.add(food)
     db.session.commit()
 
 

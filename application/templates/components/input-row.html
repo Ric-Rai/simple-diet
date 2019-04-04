@@ -10,14 +10,9 @@
             {% endfor %}
         </tr>
     {% endif %}
-
-    <tr id="input-row" row-id="{{ row_dict['id'] if row_dict }}">
+    <tr id="input-row" row-id="{{id if id}}">
         {% for field in form %}
-            {% if row_dict %}
-                <td>{{ field(value=row_dict[field.name], class='form-control') }}</td>
-            {% else %}
-                <td>{{ field(class='form-control') }}</td>
-            {% endif %}
+            <td>{{ field(class='form-control') }}</td>
         {% endfor %}
         <td>
             <a class="add" title="Tallenna"><i class="material-icons">&#xE03B;</i></a>
