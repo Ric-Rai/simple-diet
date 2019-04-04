@@ -15,7 +15,8 @@ def foods_view():
     foods = Food.query.filter(or_(Food.account_id == current_user.id, Food.account_id.is_(None)))\
                 .order_by(Food.account_id.desc(), Food.name)
     headers = ("Nimi", "Energia (kcal", "Proteiini", "Hiilihydraatti", "Rasva", "Toiminnot")
-    heading = "Ruokataulukko, omia ruokia yhteensä: " + str(Food.count_foods_of_user(current_user.id))
+#   Not working in Heroku ->
+#   heading = "Ruokataulukko, omia ruokia yhteensä: " + str(Food.count_foods_of_user(current_user.id))
     return render_template("components/table.html", rows=foods, headers=headers, table_type="foods", heading=heading)
 
 
