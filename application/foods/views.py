@@ -17,7 +17,7 @@ def foods_view():
     headers = ("Nimi", "Energia (kcal", "Proteiini", "Hiilihydraatti", "Rasva", "Toiminnot")
 #   Not working in Heroku ->
 #   heading = "Ruokataulukko, omia ruokia yhteensä: " + str(Food.count_foods_of_user(current_user.id))
-    return render_template("components/table.html", rows=foods, headers=headers, table_type="foods", heading=heading)
+    return render_template("components/table.html", rows=foods, headers=headers, table_type="foods", heading=False)
 
 
 @app.route("/foods/delete/<food_id>", methods=["POST"])
