@@ -30,7 +30,10 @@ from application.diets import models
 from application.diets import views
 
 from application.meals import models
+from application.meals import views
+
 from application.mealfoods import models
+from application.mealfoods import views
 
 from application.auth.models import User
 from os import urandom

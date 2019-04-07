@@ -14,10 +14,8 @@ from application.foods.forms import FoodForm
 def foods_view():
     foods = Food.query.filter(or_(Food.account_id == current_user.id, Food.account_id.is_(None)))\
                 .order_by(Food.account_id.desc(), Food.name)
-    headers = ("Nimi", "Energia (kcal", "Proteiini", "Hiilihydraatti", "Rasva", "Toiminnot")
-#   Not working in Heroku ->
-#   heading = "Ruokataulukko, omia ruokia yhteensä: " + str(Food.count_foods_of_user(current_user.id))
-    return render_template("components/table.html", rows=foods, headers=headers, table_type="foods", heading=False)
+    heading = "Ruokataulukko, omia ruokia yhteensä: " + str(Food.count_foods_of_user(current_user.id))
+    return render_template("components/table.html", rows=foods, headers=True, css_class="foods", heading=heading, url="foods", form=FoodForm())
 
 
 @app.route("/foods/delete/<food_id>", methods=["POST"])
@@ -29,16 +27,16 @@ def foods_delete_row(food_id):
 @app.route("/foods/row/<food_id>")
 @login_required
 def foods_render_row(food_id):
-    return table.render_row(food_id, Food)
+    return table.render_row(food_id, Food, FoodForm)
 
 
 @app.route("/foods/input-row/<food_id>", methods=["GET", "POST"])
 @login_required
-def foods_render_input_row(food_id):
-    return table.render_input_row(food_id, Food, FoodForm)
+def foods_edit_row(food_id):
+    return table.edit_row(food_id, Food, FoodForm)
 
 
 @app.route("/foods/input-row", methods=["GET", "POST"])
 @login_required
-def foods_render_new_input_row():
-    return table.render_new_input_row(Food, FoodForm)
+def foods_new_row():
+    return table.new_row(Food, FoodForm)

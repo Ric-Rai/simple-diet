@@ -5,12 +5,14 @@ from wtforms.validators import Length, DataRequired, NumberRange
 
 class FoodForm(FlaskForm):
     name = StringField("Nimi", [Length(min=2), DataRequired()])
-    energy = IntegerField("Energia", [NumberRange(min=0, max=1000), DataRequired()])
-    protein = DecimalField("Proteiini", [NumberRange(min=0, max=100), DataRequired()])
-    carb = DecimalField("Hiilihydraatti", [NumberRange(min=0, max=100), DataRequired()])
-    fat = DecimalField("Rasva", [NumberRange(min=0, max=100), DataRequired()])
+    energy = IntegerField("Energia", [NumberRange(min=0, max=1000)])
+    protein = DecimalField("Proteiini", [NumberRange(min=0, max=100)])
+    carb = DecimalField("Hiilihydraatti", [NumberRange(min=0, max=100)])
+    fat = DecimalField("Rasva", [NumberRange(min=0, max=100)])
 
-#   TODO: make it possible to add foods with 0 nutrient values
+    headers = ("Nimi", "Energia (kcal", "Proteiini", "Hiilihydraatti", "Rasva")
+
+    # TODO: don't allow foods with same name
 
     class Meta:
         csrf = False

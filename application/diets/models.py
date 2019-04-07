@@ -8,4 +8,5 @@ class Diet(db.Model):
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
     name = db.Column(db.String(100), unique=True, nullable=False)
     edited = db.Column(db.DateTime, nullable=False)
-    meals = db.relationship("Meal", backref='meals', lazy=True)
+    meals = db.relationship("Meal", backref='all_meals_in_diet', lazy=True, cascade='all, delete')
+    meals_query = db.relationship("Meal", lazy="dynamic")

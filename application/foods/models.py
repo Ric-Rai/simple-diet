@@ -17,7 +17,7 @@ class Food(db.Model):
     @staticmethod
     def count_foods_of_user(user_id):
         stmt = text("SELECT COUNT(Food.id) FROM Food "
-                    "WHERE (account_id = :user_id)").params(user_id=user_id)
+                    "WHERE Food.account_id = :user_id").params(user_id=user_id)
         res = db.engine.execute(stmt)
 
         response = []

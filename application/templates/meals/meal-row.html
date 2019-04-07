@@ -1,0 +1,28 @@
+<tr row-id="{{ meal.id }}" class="table-wrapper data-table">
+    <td class="p-0" colspan="7">
+        <table class="meal table table-bordered" url="meals/{{ meal.id }}/foods">
+            <thead>
+            <th scope="col">Ateria</th>
+            <th scope="col">
+                <button type="button" class="btn btn-info add-row">
+                    <i class="fa fa-plus"></i>
+                    Lisää uusi
+                </button>
+            </th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col">
+            <th>
+                <a class="delete-meal" title="Poista"><i class="material-icons">&#xE872;</i></a>
+            </th>
+            </th>
+            </thead>
+            <tbody>
+            {% for row in meal.mealfoods %}
+                {% include "components/row.html" %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </td>
+</tr>

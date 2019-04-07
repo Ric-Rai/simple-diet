@@ -1,4 +1,37 @@
-input:disabled{
+
+
+#diet, .meal {
+    table-layout: fixed;
+    width: 900px;
+}
+
+#diet > thead > tr > th{
+    width: 100px;
+}
+
+#diet > thead > tr > th:nth-child(1){
+    width: 300px;
+}
+
+#diet > tbody > tr > td{
+    width: 900px;
+}
+
+.meal th,
+.meal td{
+    width: 100px;
+}
+
+.meal th:nth-child(1),
+.meal th:nth-child(2){
+    width: 150px;
+}
+
+.meal td:nth-child(1){
+    width:200px;
+}
+
+input[readonly]{
     border:none;
     background-color: white !important;
 }
@@ -11,6 +44,11 @@ body {
 
 .error{
     color: red;
+}
+
+.meals .table-wrapper{
+    margin: 0px;
+    padding: 0px;
 }
 
 .table-wrapper {
@@ -30,7 +68,7 @@ body {
     font-size: 22px;
 }
 
-.table-title .add-new {
+.add-row {
     float: right;
     height: 30px;
     font-weight: bold;
@@ -41,12 +79,13 @@ body {
     line-height: 13px;
 }
 
-.table-title .add-new i {
+.table-title .add-row i {
     margin-right: 4px;
 }
 
 table.table {
     table-layout: fixed;
+    margin: 0px;
 }
 
 table.table tr th, table.table tr td {

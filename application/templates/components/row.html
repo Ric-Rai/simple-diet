@@ -1,13 +1,12 @@
-{% if not rows %}<table>{% endif %}
-
 <tr row-id="{{ row.id }}">
-    {% for col in row.__table__.columns if not 'id' in col.name %}
-        {% if col.type.python_type.__name__ == 'datetime' %}
-            <td>{{ row[col.name].strftime('%d.%m.%Y %H:%M') }}</td>
-        {% elif col.name == 'name' and anchors %}
-            <td><a href="{{ row.id|string }}">{{ row[col.name] }}</a></td>
+    {% for field in form %}
+        {% if field.type == 'DateTimeField' %}
+            <td>{{ row[field.name].strftime('%d.%m.%Y %H:%M') }}</td>
+        {% elif anchors and field.name == 'name' %}
+            <td><a href="{{ row.id|string }}">{{ row[field.name] }}</a></td>
+        {% elif field.type == 'HiddenField' %}
         {% else %}
-            <td>{{ row[col.name] }}</td>
+            <td>{{ row[field.name] }}</td>
         {% endif %}
     {% endfor %}
     {% if row.account_id %}
@@ -19,5 +18,3 @@
         <td></td>
     {% endif %}
 </tr>
-
-{% if not rows %}</table>{% endif %}

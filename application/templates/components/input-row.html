@@ -1,22 +1,26 @@
-<table>
-    {% if form.errors %}
-        <tr id="error-row">
-            {% for field in form %}
-                {% if field.name in form.errors %}
-                    <td class="error">{{ ', '.join(form.errors[field.name]) }}</td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-            {% endfor %}
-        </tr>
-    {% endif %}
-    <tr id="input-row" row-id="{{id if id}}">
+{% if form.errors %}
+    <tr id="error-row">
         {% for field in form %}
-            <td>{{ field(class='form-control') }}</td>
+            {% if field.name in form.errors %}
+                <td class="error">{{ ', '.join(form.errors[field.name]) }}</td>
+            {% elif field.type == 'HiddenField' %}
+            {% else %}
+                <td></td>
+            {% endif %}
         {% endfor %}
-        <td>
-            <a class="add" title="Tallenna"><i class="material-icons">&#xE03B;</i></a>
-            <a class="delete" title="Poista"><i class="material-icons">&#xE872;</i></a>
-        </td>
     </tr>
-</table>
+{% else %}
+<tr id="input-row" row-id="{{ id if id }}">
+    {% for field in form %}
+        {% if field.type == 'HiddenField' %}
+            {{ field }}
+        {% else %}
+            <td>{{ field(class='form-control') }}</td>
+        {% endif %}
+    {% endfor %}
+    <td>
+        <a class="add" title="Tallenna"><i class="material-icons">&#xE03B;</i></a>
+        <a class="delete" title="Poista"><i class="material-icons">&#xE872;</i></a>
+    </td>
+</tr>
+{% endif %}
