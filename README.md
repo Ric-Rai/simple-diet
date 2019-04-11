@@ -14,3 +14,5 @@ Sovellus mahdollistaa yksinkertaisten ruokavalioiden luomisen. Rekisteröitynyt 
 [Alustava tietokantakaavio](documentation/db-diagram.png)
 
 [Käyttötapaukset](documentation/use-cases.md)
+
+[Käyttö- ja asennusohje](documentation/user-manual.md)
