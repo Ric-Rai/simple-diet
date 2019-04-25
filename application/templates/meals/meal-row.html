@@ -1,19 +1,18 @@
 <tr row-id="{{ meal.id }}" class="table-wrapper data-table">
     <td class="p-0" colspan="7">
-        <table class="meal table table-bordered" url="meals/{{ meal.id }}/foods">
+        <table class="meal table table-bordered" url="mealfoods">
             <thead>
-            <th scope="col">Ateria</th>
+            <th scope="col">Ateria {{ meal.order_num }}</th>
             <th scope="col">
-                <button type="button" class="btn btn-info add-row">
+                <button add-url="/mealfoods/new?meal_id={{ meal.id }}" type="button" class="btn btn-info add-row">
                     <i class="fa fa-plus"></i>
-                    Lisää uusi
+                    Lisää ruoka
                 </button>
             </th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col">
-            <th>
+            <th scope="col">{{ meal.energy }}</th>
+            <th scope="col">{{ meal.protein }}</th>
+            <th scope="col">{{ meal.carb }}</th>
+            <th scope="col">{{ meal.fat }}<th>
                 <a class="delete-meal" title="Poista"><i class="material-icons">&#xE872;</i></a>
             </th>
             </th>

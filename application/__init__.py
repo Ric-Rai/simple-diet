@@ -1,7 +1,6 @@
 from flask import Flask
 from sqlalchemy import event
 
-
 app = Flask(__name__, static_url_path='/static')
 
 from flask_sqlalchemy import SQLAlchemy
@@ -28,12 +27,15 @@ from application.auth import views
 
 from application.diets import models
 from application.diets import views
+from application.diets.models import Diet
 
 from application.meals import models
 from application.meals import views
+from application.meals.models import Meal
 
 from application.mealfoods import models
 from application.mealfoods import views
+from application.mealfoods.models import MealFood
 
 from application.auth.models import User
 from os import urandom
@@ -52,21 +54,33 @@ def load_user(user_id):
     return User.query.get(user_id)
 
 
-# noinspection PyUnusedLocal
 @event.listens_for(User.__table__, 'after_create')
 def user_init_values(*args, **kwargs):
     db.session.add(User('test', 'test', 'Testaaja', 'test@test.test'))
     db.session.commit()
 
 
-# noinspection PyUnusedLocal
+from application.init_data import *
+
+
 @event.listens_for(Food.__table__, 'after_create')
-def food_init_values(*args, **kwargs):
-    food = Food()
-    food.name = "Vesi"
-    food.energy = food.protein = food.carb = food.fat = 0
-    db.session.add(food)
-    db.session.commit()
+def food_init(*args, **kwargs):
+    food_init_values()
+
+
+@event.listens_for(Diet.__table__, 'after_create')
+def diet_init(*args, **kwargs):
+    diet_init_values()
+
+
+@event.listens_for(Meal.__table__, 'after_create')
+def meal_init(*args, **kwargs):
+    meal_init_values()
+
+
+@event.listens_for(MealFood.__table__, 'after_create')
+def mealfood_init(*args, **kwargs):
+    mealfood_init_values()
 
 
 try:

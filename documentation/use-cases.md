@@ -6,59 +6,95 @@ Käyttöliittymän komponentit on järkevää toteuttaa taulukkomuotoisesti, sil
 
 <br>
 
-#### Käyttäjä haluaa tehdä tehdä ruokavalion
+#### Käyttäjä haluaa tehdä ruokavalion
 
 - Käyttäjä rekisteröityy sovellukseen ja koostaa itselleen ruokavalion aterioista. Käyttäjä muodostaa aterian valitsemalla siihen perusruoka-aineita valmiista listasta, sekä antamalla ruokien määrät ateriassa.
 
 ```diff
 + Rekisteröinti ja kirjautuminen on toteutettu
-- Päänäkymä ruokavalion luomiselle puuttuu
++ Päänäkymä ruokavalioiden luomiselle on toteutettu
++ Ruokavalioon voi lisätä aterioita ja niitä voi poistaa
++ Aterioihin voi lisätä ruokia ja niitä voi poistaa
 ```
-Ruokien valitseminen listasta on haastavaa toteuttaa käyttäjäystävällisesti. Toimivaa voisi olla käyttää jonkinlaista autocomplete-ominaisuutta ruoan nimeä kirjoitettaessa. Sovellukselle pitäisi pystyä antamaan tiedosto, jonka sisältämistä riveistä ruokataulukkoon luodaan valmiit "perusruoka-aineet"
+Ruokien valitseminen listasta on haastavaa toteuttaa käyttäjäystävällisesti. Toimivaa voisi olla käyttää jonkinlaista autocomplete-ominaisuutta ruoan nimeä kirjoitettaessa. Sovellus luo käynnistymisen yhteydessä valmiiksi listan ruoka-aineita.
 
+SQL esimerkki uuden ruokavalion koostamisesta tietokantaan:
+
+<pre><code>INSERT INTO Diet (account_id, name, edited) VALUES (?, ?, ?);
+INSERT INTO Meal (diet_id, order_num) VALUES (?, ?);
+INSERT INTO Meal_food (meal_id, food_id, food_name, amount, order_num) VALUES (?, ?, ?, ?, ?);
+</code></pre>
+
+SQL esimerkki ruokavalion ja kaikkien sen aterioiden sekä ruokien poistamiseksi tietokannasta:
+
+<pre><code>DELETE FROM Diet WHERE Diet.id = :diet_id;
+DELETE FROM Meal WHERE Meal.diet_id = :diet_id;
+DELETE FROM Meal_food WHERE Meal_food.id IN (
+  SELECT Meal_food.id FROM Meal_food 
+  JOIN Meal ON Meal_food.meal_id = Meal.id 
+  WHERE Meal.diet_id = :diet_id
+);</code></pre>
 <br>
 
 #### Käyttäjä haluaa perustietoa ruokavalion koostumuksesta
 
-- Käyttäjä näkee makroravinnekoostumuksen ja energiamäärän reaaliajassa koostaessaan ruokavaliota.
+- Käyttäjä näkee makroravinnekoostumuksen ja energiamäärän koostaessaan ruokavaliota.
 
 ```diff
-- Puuttuu
++ Toteutettu: käyttäjä näkee jokaisen aterian makroravinnekoostumuksen
++ Toteutettu: käyttäjä näkee koko ruokavalion makroravinnekoostumuksen
 ```
+
+SQL esimerkki dieetin makroravinnekoostumuksen selvittämiseksi:
+
+<pre><code>SELECT SUM(energy * amount / 100) AS energy, SUM(protein * amount / 100) AS protein, 
+SUM(carb * amount / 100) AS carb, SUM(fat * amount / 100) AS fat FROM food
+JOIN Meal_food ON Food.id = Meal_food.food_id
+JOIN Meal ON Meal_food.meal_id = Meal.id
+JOIN Diet ON Meal.diet_id = Diet.id
+WHERE diet_id = 1</code></pre>
 
 <br>
 
 #### Käyttäjä haluaa käyttää mitä tahansa ruoka-ainetta ruokavaliossaan tai muokata ruoka-aineen tietoja
 
-- Käyttäjä syöttää haluamansa ruoan nimen ja ravintoainekoostumuksen ruoka-ainetaulukkoon, minkä jälkeen sitä voidaan käyttää ruokavalion osana. Käyttäjä voi myös muokata minkä tahansa ruoan nimeä tai ravintoainekoostumusta, sekä halutessaan poistaa ruoan taulukosta.
+- Käyttäjä syöttää haluamansa ruoan nimen ja ravintoainekoostumuksen ruoka-ainetaulukkoon, minkä jälkeen sitä voidaan käyttää ruokavalion osana.
 
 ```diff
 + Ruoka-aineille on toteutettu täysi CRUD-toiminnallisuus
-- Ruokataulukon tulee olla käyttäjäkohtainen
-- Ruokia tulisi voida etsiä nimen perusteella
++ Ruokataulukosta on tehty käyttäjäkohtainen
 ```
+
+SQL esimerkki ruoka-aineen päivittämisestä:
+
+<pre><code>UPDATE Food SET name = ?, energy = ?, protein = ?, carb = ?, fat = ? WHERE id = ?</code></pre>
 
 <br>
 
-#### Käyttäjä haluaa muuttaa aterioiden tai ruokien järjestystä ruokavaliossa
+#### Käyttäjä haluaa yhteenvetotietoja luomistaan ruokavalioista
 
-- Käyttäjä pystyy helposti yksinkertaisella ja intuitiivisellä tavalla muuttamaan näiden järjetystä.
-
-```diff
-- Puuttuu
-```
-
-Jonkinlaiset ylös- ja alaspäin osoittavat nuolet, joita klikkaamalla ateria tai aterian sisältämä ruoka siirtyy taulukossa ylöspäin. Samalla palvelimelle lähetetään tieto muuttuneesta järjestyksestä. Tehokkainta olisi käyttää jotain näppäinyhdistelmää esim. shift+up/down. Tämä vaatisi kuitenkin mahdollisuuden valita rivejä taulukosta.
-
-<br>
-
-#### Käyttäjä haluaa käyttää aterian osana reseptillä valmistettua ruokaa tai muuta useammasta ruoka-aineesta koostuvaa ruokaa
-
-- Käyttäjä syöttää reseptitaulukkoon reseptin nimen ja sen sisältämät ruoka-aineet ja niiden määrät reseptissä. Reseptinä tallennettua ruokaa voidaan käyttää osana ruokavaliota, kuten mitä tahansa muuta ruoka-ainetaulukon ruokaa.
+- Käyttäjä näkee yhteenvedon luomistaan ruokavalioista
 
 ```diff
-- Puuttuu
++ Yhteenvetosivu on toteutettu
 ```
 
-Tämä on edityneempi ominaisuus, jonka toteuttamisessa on joitain haasteita. Jotta sovelluksen logiikka pysyy mahdollisimman yksinkertaisena, niin reseptille tulee laskea normaali ravintoainekoostumus 100 g kohden, ja tallentaa se ruoka-ainetaulukkoon, jossa se käyttäytyy kuten normaali ruoka. Eli ruokataulukon ja reseptitaulukon välille syntyy riippuvuus siten, että aina kun reseptitaulukkoa muutetaan, niin myös ruokataulukkoa muutetaan. Tämä tietysti myös denormalisoi tietokantaa.
+SQL kysely, joka kertoo kuinka monta ruokaa on keskimäärin käyttäjän ruokavalioissa:
 
+<pre><code>SELECT (SELECT COUNT(*) FROM Meal_food) /
+(SELECT COUNT(*) AS diet_count FROM Diet)</code></pre>
+
+SQL-kysely, joka kertoo kuinka monta ruoka-ainetta on keskimäärin yhdessä ateriassa:
+
+<pre><code>SELECT AVG(mf_count) FROM (
+    SELECT COUNT(*) AS mf_count FROM Meal_food
+    GROUP BY Meal_food.meal_id
+)</code></pre>
+
+SQL-kysely, joka kertoo eniten käytetyn ruoan ruokavalioissa:
+
+<pre><code>SELECT Food.name, SUM(Meal_food.amount) AS total FROM Meal_food
+JOIN Food ON Meal_food.food_id = Food.id
+GROUP BY Food.name
+ORDER BY total DESC
+LIMIT 1</code></pre>

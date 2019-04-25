@@ -3,17 +3,17 @@
         {% for field in form %}
             {% if field.name in form.errors %}
                 <td class="error">{{ ', '.join(form.errors[field.name]) }}</td>
-            {% elif field.type == 'HiddenField' %}
+            {% elif field.type == 'IdField' %}
             {% else %}
                 <td></td>
             {% endif %}
         {% endfor %}
     </tr>
 {% else %}
-<tr id="input-row" row-id="{{ id if id }}">
+<tr id="input-row" row-id="{{ form.id.data if form.id.data }}">
     {% for field in form %}
-        {% if field.type == 'HiddenField' %}
-            {{ field }}
+        {% if field.type == 'IdField' %}
+            <td class="d-none">{{ field }}</td>
         {% else %}
             <td>{{ field(class='form-control') }}</td>
         {% endif %}

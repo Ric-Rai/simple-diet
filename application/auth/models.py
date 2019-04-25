@@ -1,4 +1,7 @@
-from application import db
+from flask_login import current_user
+from sqlalchemy.orm import dynamic
+
+from application import db, app
 
 
 class User(db.Model):
@@ -6,7 +9,8 @@ class User(db.Model):
     __tablename__ = "account"
 
     id = db.Column(db.Integer, primary_key=True)
-    foods = db.relationship("Food", backref='account', lazy=True)
+    foods = db.relationship("Food", backref='account', lazy='dynamic')
+    diets = db.relationship("Diet", backref='account', lazy='dynamic')
 
     username = db.Column(db.String(144), nullable=False, unique=True)
     password = db.Column(db.String(144), nullable=False)

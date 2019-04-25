@@ -3,7 +3,7 @@
 Lataa sovellus osoitteesta https://github.com/ric-rai/simple-diet
 
 
-## Sovelluksen asentaminen
+## Sovelluksen asentaminen paikallisesti
 
 Mene sovelluksen juurihakemistoon ja luo Python-virtuaaliympäristö komennolla
 
@@ -30,6 +30,14 @@ Sovellus käynnistetään juurihakemistosta komennolla
 
 ```
 export FLASK_APP=application && flask run
+```
+
+## Sovelluksen asentaminen Herokuun
+
+Asenna sovellus ensin paikallisesti ja luo tili Herokuun. Sovellus luodaan Herokuun komennolla:
+
+```
+heroku create sovelluksen-nimi
 ```
 
 ## Kirjautuminen ja rekisteröityminen

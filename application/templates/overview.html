@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <ul>
+        <li>Aterioita keskimäärin yhdessä ruokavaliossa: {{ overview.average_meal_count() }}</li>
+        <li>Ruokia keskimäärin yhdessä ruokavaliossa: {{ overview.average_diet_mealfood_count() }}</li>
+        <li>Ruokia keskimäärin yhdessä ateriassa: {{ overview.average_meal_mealfood_count() }}</li>
+        <li>Omia ruokia yhteensä: {{ overview.user_food_count() }}</li>
+        <li>Ruokavalioissa eniten käytetty ruoka: {{ overview.most_used_food() }}</li>
+    </ul>
+{% endblock %}

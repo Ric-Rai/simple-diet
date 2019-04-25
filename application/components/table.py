@@ -8,52 +8,52 @@ def render_table(**kwargs):
     return render_template("components/table.html", **kwargs)
 
 
-def delete_row(row_id, db_model):
-    row = get_row(row_id, db_model)
+def delete_row(db_model, form_class):
+    form = form_class(request.form)
+    if not form.validate_id_fields():
+        abort(400)
+    row = db_model.cache.pop(form.id.data)
     db.session().delete(row)
     db.session().commit()
     return Response("", status=200, mimetype='text/plain')
 
 
-def render_row(row_id, db_model, form_class, **kwargs):
-    row = get_row(row_id, db_model)
-    return render_template("components/row.html", row=row, form=form_class(), **kwargs)
-
-
-def edit_row(row_id, db_model, form_class, **kwargs):
+def edit_row(db_model, form_class, **kwargs):
     if request.method == "GET":
-        row = get_row(row_id, db_model)
-        return render_template("components/input-row.html", id=row.id, form=form_class(obj=row))
+        form = form_class(request.args)
+        if not form.validate_id_fields():
+            abort(400)
+        row = db_model.from_cache(form.id.data)
+        return render_template("components/input-row.html", form=form_class(obj=row))
     form = form_class(request.form)
     if not form.validate():
         return render_template("components/input-row.html", form=form), 422
-    row = get_row(row_id, db_model)
+    app.logger.info("fetching row for saving")
+    row = db_model.from_cache(form.id.data)
     form.populate_obj(row)
     db.session().add(row)
     db.session().commit()
+    app.logger.info("committed")
     return render_template("components/row.html", row=row, form=form_class(), **kwargs)
 
 
 def new_row(db_model, form_class, **kwargs):
     if request.method == "GET":
-        form = kwargs['initial_form'] if 'initial_form' in kwargs else form_class()
-        return render_template("components/input-row.html", form=form, row_id="")
+        form = form_class(request.args)
+        if not form.validate_id_fields():
+            abort(400)
+        return render_template("components/input-row.html", form=form)
     form = form_class(request.form)
+    del form.id
     if not form.validate():
         return render_template("components/input-row.html", form=form), 422
     row = db_model()
     form.populate_obj(row)
     if hasattr(db_model, 'account_id'):
             row.account_id = current_user.id
+    db_model.to_cache(row)
     db.session().add(row)
     db.session().commit()
+    app.logger.info("committed")
     return render_template("components/row.html", row=row, form=form_class(), **kwargs)
 
-
-def get_row(row_id, db_model):
-    row = db_model.query.get(row_id)
-    if row is None:
-        abort(422)
-    if row.account_id is not current_user.id:
-        abort(401)
-    return row

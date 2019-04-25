@@ -1,10 +1,11 @@
-<tr row-id="{{ row.id }}">
+<tr row-id="{{ row.id if row.id }}">
     {% for field in form %}
-        {% if field.type == 'DateTimeField' %}
+        {% if field.type == 'IdField' %}
+            <td class="d-none">{{ field(value=row[field.name]) }}</td>
+        {% elif field.type == 'DateTimeField' %}
             <td>{{ row[field.name].strftime('%d.%m.%Y %H:%M') }}</td>
         {% elif anchors and field.name == 'name' %}
             <td><a href="{{ row.id|string }}">{{ row[field.name] }}</a></td>
-        {% elif field.type == 'HiddenField' %}
         {% else %}
             <td>{{ row[field.name] }}</td>
         {% endif %}

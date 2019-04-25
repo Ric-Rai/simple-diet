@@ -4,9 +4,11 @@
     <div class="table-wrapper">
         <div class="table-title">
             <div class="row">
-                <div class="col-sm-8"><h2>Otsikko</h2></div>
+                <div class="col-sm-8"><h2>{{ diet.name }}</h2></div>
                 <div class="col-sm-4">
-                    <button id="add-meal" type="button" class="btn btn-info add-row"><i class="fa fa-plus"></i> Uusi ateria</button>
+                    <button add-url="{{ add_url }}" id="add-meal" type="button" class="btn btn-info add-row">
+                        <i class="fa fa-plus"></i> Uusi ateria
+                    </button>
                 </div>
             </div>
         </div>
@@ -20,9 +22,17 @@
                 <th scope="col">Rasva</th>
                 <th scope="col">Toiminnot</th>
             </tr>
+            <tr>
+                <th scope="col" colspan="2"></th>
+                <th scope="col">{{ diet.energy }}</th>
+                <th scope="col">{{ diet.protein }}</th>
+                <th scope="col">{{ diet.carb }}</th>
+                <th scope="col">{{ diet.fat }}</th>
+                <th scope="col"></th>
+            </tr>
             </thead>
             <tbody>
-            {% for meal in meals %}
+            {% for meal in diet.meals %}
                 {% include "meals/meal-row.html" %}
             {% endfor %}
             </tbody>

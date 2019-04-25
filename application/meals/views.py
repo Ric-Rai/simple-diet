@@ -1,25 +1,37 @@
 from flask import render_template, request, Response, abort
-from flask_login import login_required, current_user
+from flask_login import login_required
 
 from application import app, db
 
 from application.diets.models import Diet
 from application.mealfoods.forms import MealFoodForm
+from application.meals.forms import MealForm
 from application.meals.models import Meal
 
 
-@app.route("/meals/delete/<meal_id>", methods=["POST"])
+@app.route("/meals/delete", methods=["POST"])
 @login_required
-def meals_delete_row(meal_id):
-    Meal.query.filter(Meal.id == meal_id).delete()
+def meals_delete_row():
+    form = MealForm(request.form)
+    if not form.validate_id_fields():
+        abort(401)
+    meal = Meal.query.get(form.id.data)
+    Meal.query.filter_by(id=form.id.data).delete()
+    i = 1
+    for meal in meal.diet.meals_query.order_by(Meal.order_num).all():
+        meal.order_num = i
+        i += 1
     db.session.commit()
     return Response("", status=200, mimetype='text/plain')
 
 
-@app.route("/diets/<diet_id>/meals/input-row", methods=["GET"])
+@app.route("/meals/new", methods=["GET"])
 @login_required
-def meals_new_row(diet_id):
-    diet = Diet.query.get(diet_id)
+def meals_new_row():
+    form = MealForm(request.args)
+    if not form.validate_id_fields():
+        abort(401)
+    diet = Diet.query.get(form.diet_id.data)
     meal = Meal()
     meal.order_num = diet.meals_query.count() + 1
     diet.meals.append(meal)
