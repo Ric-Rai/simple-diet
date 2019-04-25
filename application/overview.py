@@ -10,7 +10,7 @@ class Overview:
     def average_meal_count():
         stmt = text("SELECT AVG(meal_count) FROM ("
                     " SELECT COUNT(*) AS meal_count FROM Meal"
-                    " GROUP BY Meal.diet_id )"
+                    " GROUP BY Meal.diet_id ) AS sub_query"
                     )
         return round(db.engine.execute(stmt).fetchone()[0], 2)
 
@@ -25,7 +25,7 @@ class Overview:
     def average_meal_mealfood_count():
         stmt = text("SELECT AVG(mf_count) FROM ("
                     " SELECT COUNT(*) AS mf_count FROM Meal_food"
-                    " GROUP BY Meal_food.meal_id )"
+                    " GROUP BY Meal_food.meal_id ) AS sub_query"
                     )
         return round(db.engine.execute(stmt).fetchone()[0], 2)
 

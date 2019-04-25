@@ -1,6 +1,3 @@
-from flask_login import current_user
-from sqlalchemy.orm import dynamic
-
 from application import db, app
 
 

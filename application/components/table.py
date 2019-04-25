@@ -13,6 +13,8 @@ def delete_row(db_model, form_class):
     if not form.validate_id_fields():
         abort(400)
     row = db_model.cache.pop(form.id.data)
+    if hasattr(row, "before_delete"):
+        row.before_delete()
     db.session().delete(row)
     db.session().commit()
     return Response("", status=200, mimetype='text/plain')

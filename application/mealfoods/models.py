@@ -1,8 +1,8 @@
 from sqlalchemy.orm import relationship
 
 from application import db, app
-from application.foods.models import Food
 from application.models import Base
+from application.foods.models import Food
 
 
 class MealFood(Base):

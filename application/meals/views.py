@@ -16,7 +16,7 @@ def meals_delete_row():
     if not form.validate_id_fields():
         abort(401)
     meal = Meal.query.get(form.id.data)
-    Meal.query.filter_by(id=form.id.data).delete()
+    db.session.delete(meal)
     i = 1
     for meal in meal.diet.meals_query.order_by(Meal.order_num).all():
         meal.order_num = i

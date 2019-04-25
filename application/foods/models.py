@@ -1,4 +1,3 @@
-from sqlalchemy import text
 from application import db
 from application.models import Base
 
@@ -12,3 +11,10 @@ class Food(Base):
     fat = db.Column(db.Numeric(scale=2), nullable=False)
     cache = dict()
 
+    def before_delete(self):
+        from application.mealfoods.models import MealFood
+        mealfoods = MealFood.query.filter_by(_food_name=self.name).all()
+        for mealfood in mealfoods:
+            mealfood.food_id = None
+            db.session.add(mealfood)
+        db.session.commit()
