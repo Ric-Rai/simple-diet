@@ -8,7 +8,7 @@ from application.foods.models import Food
 
 class MealFood(Base):
     meal_id = db.Column(db.Integer, db.ForeignKey('meal.id'), nullable=False)
-    food_id = db.Column(db.Integer, db.ForeignKey('food.id'), ondelete="SET NULL")
+    food_id = db.Column(db.Integer, db.ForeignKey('food.id', ondelete="SET NULL"))
     _food_name = db.Column(db.String(100), nullable=False)
     food = relationship("Food", lazy=True, uselist=False)
     meal = relationship("Meal", lazy=True, uselist=False)
