@@ -273,5 +273,6 @@ table.table .form-control.error {
     border-color: #f50000;
 }
 
-table.table td .add {
+.table-wrapper {
+    min-width: 930px !important;
 }
