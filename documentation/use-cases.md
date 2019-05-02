@@ -81,20 +81,29 @@ SQL esimerkki ruoka-aineen päivittämisestä:
 
 SQL kysely, joka kertoo kuinka monta ruokaa on keskimäärin käyttäjän ruokavalioissa:
 
-<pre><code>SELECT (SELECT COUNT(*) FROM Meal_food) /
-(SELECT COUNT(*) AS diet_count FROM Diet)</code></pre>
+<pre><code>SELECT AVG(meal_count) FROM (
+    SELECT COUNT(*) AS meal_count 
+    FROM Meal
+    JOIN Diet ON Meal.diet_id = Diet.id
+    WHERE Diet.account_id = :user_id
+    GROUP BY Meal.diet_id 
+) AS Subquery</code></pre>
 
-SQL-kysely, joka kertoo kuinka monta ruoka-ainetta on keskimäärin yhdessä ateriassa:
+SQL-kysely, joka kertoo kuinka monta ruoka-ainetta on keskimäärin käyttäjän yhdessä ateriassa:
 
-<pre><code>SELECT AVG(mf_count) FROM (
-    SELECT COUNT(*) AS mf_count FROM Meal_food
-    GROUP BY Meal_food.meal_id
-)</code></pre>
+<pre><code>SELECT mf_count / diet_count FROM (
+    SELECT COUNT(DISTINCT Diet.id) AS diet_count, COUNT(*) AS mf_count
+    FROM Meal_food
+    JOIN Meal ON Meal_food.meal_id = Meal.id
+    JOIN Diet ON Meal.diet_id = Diet.id
+    WHERE Diet.account_id = :user_id
+) AS Subquery</code></pre>
 
-SQL-kysely, joka kertoo eniten käytetyn ruoan ruokavalioissa:
+SQL-kysely, joka kertoo eniten käytetyn ruoan käyttäjän ruokavalioissa:
 
 <pre><code>SELECT Food.name, SUM(Meal_food.amount) AS total FROM Meal_food
 JOIN Food ON Meal_food.food_id = Food.id
+WHERE Food.account_id = :user_id
 GROUP BY Food.name
 ORDER BY total DESC
 LIMIT 1</code></pre>
