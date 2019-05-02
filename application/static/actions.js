@@ -71,7 +71,14 @@ $.fn.dataTable = function () {
                     else $table.prepend($inputRow);
                 } else if ($row.eq(0).is("tr")) $row.replaceWith($inputRow);
                 if ($diet.length)
-                    $inputRow.find("#food_name").easyAutocomplete({data: window.foodList});
+                    $inputRow.find("#food_name").easyAutocomplete({
+                        data: window.foodList,
+                        list: {
+                            match: {
+                                enabled: true
+                            }
+                        }
+                    });
                 $addRowButton.attr("disabled", "disabled");
             },
             error = ($inputRow, $errorRow) => {
