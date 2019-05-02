@@ -21,12 +21,13 @@ class Overview:
 
     @staticmethod
     def average_diet_mealfood_count():
-        stmt = text("SELECT mf_count / diet_count FROM ("
-                    "SELECT COUNT(DISTINCT Diet.id) AS diet_count, COUNT(*) AS mf_count"
+        stmt = text("SELECT AVG(mf_count) FROM ("
+                    "SELECT COUNT(*) AS mf_count"
                     " FROM Meal_food"
                     " JOIN Meal ON Meal_food.meal_id = Meal.id"
                     " JOIN Diet ON Meal.diet_id = Diet.id"
                     " WHERE Diet.account_id = :user_id"
+                    " GROUP BY Meal.diet_id"
                     ") AS Subquery").params(user_id=current_user.id)
         res = db.engine.execute(stmt).fetchone()[0]
         if res is None:
