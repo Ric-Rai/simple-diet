@@ -12,7 +12,7 @@ Food -tauluun on tallennettu kaikki ruoat makroravinnetietoineen. Lisäksi ruoki
 
 ### Ruokavaliot
 
-Diet -taulu sisältää ruokavalion nimen, sekä tiedon käyttäjästä, jolle se kuuluu. Lisäksi Ruokavaliossa on aikaleima, joka kertoo, milloin sitä on viimeksi muokattu.
+Diet -taulu sisältää ruokavalion nimen, sekä tiedon käyttäjästä, jolle se kuuluu. Lisäksi Ruokavaliossa on aikaleima, joka kertoo, milloin se on luotu (käyttää asiakkaan/selaimen aikaa).
 
 ### Ateriat
 
@@ -22,7 +22,7 @@ Meal -taulussa on kaikki ateriat. Jokaisesta ateriasta tallennetaan tieto ruokav
 
 MealFood -taulu on liitostaulu, joka liittää ateriat ja ruoat yhteen. Taulu toteutettiin niin, että se mahdollistaa myös Food-taululle tuntemattomien ruokien lisäämisen. Tällöin ateriaan voi vapaasti lisätä ruokien nimiä ja määriä, ja käydä vasta myöhemmin lisäämässä ne Food-tauluun. Jokaisesta ruoasta tallennetaan myös sen määrä ateriassa, sekä sen järjestys listauksessa.
 
- <br>
+<br>
 
 ## Tietokantakaavio
 ![Database](db-diagram.png)
