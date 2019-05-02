@@ -12,8 +12,7 @@ from application.mealfoods.forms import MealFoodForm
 @app.route("/diets/view")
 @login_required
 def diets_view():
-    diets = current_user.diets.order_by(Diet.edited)
-    Diet.to_cache(diets)
+    diets = current_user.diets.order_by(Diet.edited.desc())
     return table.render_table(rows=diets, form=DietForm(), headers=True, css_class='diets', url='diets', anchors=True)
 
 
@@ -42,8 +41,7 @@ def diet_view(diet_id):
     form.id.data = diet_id
     if not form.validate_id():
         abort(422)
-    diet = Diet.from_cache(diet_id)
-    headers = ("Ruoka", "Määrä", "Energia", "Proteiini", "Hiilihydraatti", "Rasva")
+    diet = Diet.query.get(diet_id)
     url = "diets/" + str(diet_id) + "/meals"
     return render_template("diets/view.html", form=MealFoodForm(), diet=diet, url=url,
-                           headers=headers, add_url='/meals/new?diet_id=%s' % diet_id)
+                           add_url='/meals/new?diet_id=%s' % diet_id)

@@ -1,9 +1,18 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    {% if current_user.is_authenticated %}
-        Hello {{ current_user.name }}!
-    {% else %}
-        Hello world!
-    {% endif %}
+    <div class="row">
+        <div class="col">
+            <div class="jumbotron">
+                <h1>Simple Diet</h1>
+                <hr class="my-4">
+                <p>Simple Diet on sovellus, joka mahdollistaa yksinkertaisten ruokavalioiden luomisen. Rekisteröityneenä
+                    käyttäjänä voit lisätä haluamiesi ruokien ravintoainekoostumuksia sovellukseen ja rakentaa niistä
+                    itsellesi ruokavalion. Rekisteröityminen on helppoa ja kestää vain hetken, joten lähde nyt ottamaan
+                    selvää, kuinka yksinkertaista ja helppoa ruokavalioiden tekeminen voi olla!</p>
+                <a class="btn btn-primary btn-lg" href="{{ url_for('auth_register') }}" role="button"> Rekisteröidy
+                    nyt! </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

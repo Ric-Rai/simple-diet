@@ -4,9 +4,6 @@ from wtforms import IntegerField
 from wtforms.validators import DataRequired, ValidationError
 from wtforms.widgets import HiddenInput
 
-from application import app
-from application.auth.models import User
-
 
 class IdField(IntegerField):
     widget = HiddenInput()
@@ -16,8 +13,7 @@ class ModelForm(FlaskForm):
     id = IdField(None, [DataRequired()])
 
     def validate_id(form, field=None):
-        app.logger.info("validating id")
-        row = form.db_model.from_cache(form.id.data)
+        row = form.db_model.query.get(form.id.data)
         if row is None:
             return ValidationError("Invalid identifier for %s" % form.db_model.__table__.name)
         if row.account_id is not current_user.id:

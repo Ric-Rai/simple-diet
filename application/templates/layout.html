@@ -6,11 +6,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/easy-autocomplete.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Simple Diet</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Simple Diet</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,16 +24,18 @@
     </div>
     <span class="navbar-text">
         {% if current_user.is_authenticated %}
-            Kirjautunut nimellä {{ current_user.name }}. <a href="{{ url_for('auth_logout') }}">Kirjaudu ulos</a>
+            Kirjautunut nimellä {{ current_user.name }}
+            <span class="pl-3"></span>
+            <a class="btn btn-info" href="{{ url_for('auth_logout') }}">Kirjaudu ulos</a>
         {% else %}
-            <a href="{{ url_for('auth_login') }}">Kirjaudu</a>
+            <a class="btn btn-info" href="{{ url_for('auth_login') }}">Kirjaudu</a>
+            <a class="btn btn-info" href="{{ url_for('auth_register') }}">Rekisteröidy</a>
         {% endif %}
     </span>
 </nav>
 <section id="main">
     <div class="container">
         {% block body %}
-            <p>Content</p>
         {% endblock %}
     </div>
 </section>

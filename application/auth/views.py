@@ -17,10 +17,10 @@ def auth_login():
 
     user = User.query.filter_by(username=form.username.data, password=form.password.data).first()
     if not user:
-        return render_template("auth/login.html", form=form, error="No such username or password")
+        return render_template("auth/login.html", form=form, error="Väärä käyttäjätunnus tai salasana")
 
     login_user(user)
-    return redirect(url_for("index"))
+    return redirect(url_for("overview"))
 
 
 @app.route("/auth/logout")

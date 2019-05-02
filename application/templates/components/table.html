@@ -5,22 +5,20 @@
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-8">
-                    <h2>{% if heading %}{{ heading }}{% else %}Otsikko{% endif %}</h2>
+                    <h2>{{ form.heading }}</h2>
                 </div>
                 <div class="col-sm-4">
-                    <button type="button" class="btn btn-info add-row"><i class="fa fa-plus"></i> Lisää uusi</button>
+                    <button type="button" class="btn btn-info add-row">+&nbsp;&nbsp;Lisää uusi</button>
                 </div>
             </div>
         </div>
         <table class="{{ css_class }} table table-bordered" url="{{ url }}">
             <thead>
             <tr>
-                {% if headers %}
-                    {% for header in form.headers %}
-                        <th scope="col">{{ header }}</th>
-                    {% endfor %}
-                    <th scope="col">Toiminnot</th>
-                {% endif %}
+                {% for header in form.headers %}
+                    <th scope="col">{{ header }}</th>
+                {% endfor %}
+                <th scope="col">Toiminnot</th>
             </tr>
             </thead>
             <tbody>

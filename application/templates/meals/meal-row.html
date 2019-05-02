@@ -5,16 +5,17 @@
             <th scope="col">Ateria {{ meal.order_num }}</th>
             <th scope="col">
                 <button add-url="/mealfoods/new?meal_id={{ meal.id }}" type="button" class="btn btn-info add-row">
-                    <i class="fa fa-plus"></i>
-                    Lisää ruoka
+                    +&nbsp;&nbsp;Lisää ruoka
                 </button>
             </th>
-            <th scope="col">{{ meal.energy }}</th>
-            <th scope="col">{{ meal.protein }}</th>
-            <th scope="col">{{ meal.carb }}</th>
-            <th scope="col">{{ meal.fat }}<th>
-                <a class="delete-meal" title="Poista"><i class="material-icons">&#xE872;</i></a>
-            </th>
+            <th class="meal-energy" scope="col">{{ meal.energy }}</th>
+            <th class="meal-protein" scope="col">{{ meal.protein }}</th>
+            <th class="meal-carb" scope="col">{{ meal.carb }}</th>
+            <th class="meal-fat" scope="col">{{ meal.fat }}</th>
+            <th>
+                <button type="button" class="btn btn-danger add-row delete-meal">
+                    Poista ateria
+                </button>
             </th>
             </thead>
             <tbody>

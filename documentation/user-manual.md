@@ -3,7 +3,7 @@
 Lataa sovellus osoitteesta https://github.com/ric-rai/simple-diet
 
 
-## Sovelluksen asentaminen paikallisesti
+## Sovelluksen asentaminen
 
 Mene sovelluksen juurihakemistoon ja luo Python-virtuaaliympäristö komennolla
 
@@ -23,8 +23,7 @@ Asenna riippuvuudet komennolla
 pip install -r requirements.txt
 ```
 
-
-## Sovelluksen käynnistäminen
+### Sovelluksen käynnistäminen
 
 Sovellus käynnistetään juurihakemistosta komennolla
 
@@ -32,7 +31,7 @@ Sovellus käynnistetään juurihakemistosta komennolla
 export FLASK_APP=application && flask run
 ```
 
-## Sovelluksen asentaminen Herokuun
+### Sovelluksen asentaminen Herokuun
 
 Asenna sovellus ensin paikallisesti ja luo tili Herokuun. Sovellus luodaan Herokuun komennolla:
 
@@ -40,16 +39,22 @@ Asenna sovellus ensin paikallisesti ja luo tili Herokuun. Sovellus luodaan Herok
 heroku create sovelluksen-nimi
 ```
 
-## Kirjautuminen ja rekisteröityminen
+<br>
+
+## Sovelluksen käyttö
+
+Sovellusta on testattu tämän ohjeen kirjoittamisen aikaan uusimmmilla Firefox- ja Chrome-selainten versioilla työpöytäresoluutiolla.
+
+### Kirjautuminen ja rekisteröityminen
 
 Kirjautuminen onnistuu kirjoittamalla olemassaoleva käyttäjätunnus ja salasana syötekenttään ja painamalla _kirjaudu_.
 
 Rekisteröityminen tapahtuu täyttämällä rekisteröitymislomake.
 
-## Ruokataulukko
+### Ruokataulukko
 
 Ruokataulukkoon syötetään uusi ruoka painamalla _lisää uusi_ -painiketta. Ruoan tietoja voi muokata painamalla rivin oikeassa päädyssä olevaa _muokkaa_ -painiketta. Ruoan voi poistaa _poista_ -painikkeella.
 
-## Ruokavaliot
+### Ruokavaliot
 
 Uusi ruokavalio luodaan painamalla _lisää uusi_ -painiketta ja antamalla ruokavaliolle nimi.

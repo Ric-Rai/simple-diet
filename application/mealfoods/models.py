@@ -1,20 +1,18 @@
-from sqlalchemy import ForeignKeyConstraint
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 
-from application import db, app
+from application import db
 from application.models import Base
 from application.foods.models import Food
 
 
 class MealFood(Base):
     meal_id = db.Column(db.Integer, db.ForeignKey('meal.id'), nullable=False)
-    food_id = db.Column(db.Integer, db.ForeignKey('food.id', ondelete="SET NULL"))
+    food_id = db.Column(db.Integer, db.ForeignKey('food.id', ondelete="SET NULL"), nullable=True)
     _food_name = db.Column(db.String(100), nullable=False)
-    food = relationship("Food", lazy=True, uselist=False)
+    food = relationship("Food", lazy=True, uselist=False, backref=backref("mealfoods", cascade="save-update"))
     meal = relationship("Meal", lazy=True, uselist=False)
     amount = db.Column(db.Integer, nullable=False)
     order_num = db.Column(db.Integer)
-    cache = dict()
 
     @property
     def account_id(self):

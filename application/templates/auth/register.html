@@ -1,9 +1,8 @@
 {% extends "layout.html" %}
-
 {% block body %}
-
     <div class="row justify-content-center">
         <div class="col-5">
+            <h1 class="h2 pb-3">Uusi käyttäjä</h1>
             <form method="POST" action="{{ url_for('auth_register') }}">
                 {% for field in form %}
                     <div class="form-group">
@@ -22,11 +21,10 @@
                         <li class="error">{{ form[field].label }}: {{ ', '.join(errors) }}</li>
                     {% endfor %}
                 </ul>
-                <div class="form-row mt-4">
+                <div class="form-row mt-5">
                     <input class="btn btn-info" type="submit" value="Luo tunnus"/>
                 </div>
             </form>
-
         </div>
     </div>
 {% endblock %}

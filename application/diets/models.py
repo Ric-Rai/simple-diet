@@ -1,4 +1,4 @@
-from application import db, app
+from application import db
 from application.models import Base
 
 
@@ -8,7 +8,6 @@ class Diet(Base):
     edited = db.Column(db.DateTime, nullable=False)
     meals = db.relationship("Meal", lazy=True, cascade='all, delete')
     meals_query = db.relationship("Meal", lazy="dynamic")
-    cache = dict()
 
     @property
     def energy(self):

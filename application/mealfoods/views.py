@@ -1,6 +1,6 @@
 from flask_login import login_required
 
-from application import app, db
+from application import app
 
 from application.components import table
 from application.mealfoods.models import MealFood

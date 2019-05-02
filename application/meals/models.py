@@ -1,4 +1,4 @@
-from application import db, app
+from application import db
 from application.models import Base
 
 
@@ -7,7 +7,6 @@ class Meal(Base):
     order_num = db.Column(db.Integer, nullable=False)
     mealfoods = db.relationship("MealFood", lazy=True, cascade='all, delete')
     diet = db.relationship("Diet", lazy=True)
-    cache = dict()
 
     @property
     def account_id(self):

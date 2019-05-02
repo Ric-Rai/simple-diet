@@ -1,11 +1,40 @@
 {% extends "layout.html" %}
-
 {% block body %}
-    <ul>
-        <li>Aterioita keskimäärin yhdessä ruokavaliossa: {{ overview.average_meal_count() }}</li>
-        <li>Ruokia keskimäärin yhdessä ruokavaliossa: {{ overview.average_diet_mealfood_count() }}</li>
-        <li>Ruokia keskimäärin yhdessä ateriassa: {{ overview.average_meal_mealfood_count() }}</li>
-        <li>Omia ruokia yhteensä: {{ overview.user_food_count() }}</li>
-        <li>Ruokavalioissa eniten käytetty ruoka: {{ overview.most_used_food() }}</li>
-    </ul>
+    <div class="row">
+        <div class="col- 5">
+            <h1 class="h2 pb-3">Yhteenveto ruokavalioista</h1>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Aterioita keskimäärin yhdessä ruokavaliossa:</span>
+                        <span class="pl-4">{{ overview.average_meal_count() }}</span>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Ruokia keskimäärin yhdessä ruokavaliossa:</span>
+                        <span class="pl-4">{{ overview.average_diet_mealfood_count() }}</span>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Ruokia keskimäärin yhdessä ateriassa:</span>
+                        <span class="pl-4">{{ overview.average_meal_mealfood_count() }}</span>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Omia ruokia yhteensä:</span>
+                        <span class="pl-4">{{ overview.user_food_count() }}</span>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Ruokavalioissa eniten käytetty ruoka:</span>
+                        <span class="pl-4">{{ overview.most_used_food() }}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 {% endblock %}

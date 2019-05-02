@@ -10,8 +10,8 @@ from application.forms import IdField, ModelForm
 class MealFoodForm(ModelForm):
     db_model = MealFood
     meal_id = IdField()
-    food_name = StringField(None, [Length(min=2), DataRequired()])
-    amount = IntegerField(None, [NumberRange(min=0)])
+    food_name = StringField(None, [Length(min=2), DataRequired(message="Ruoan nimi puuttuu")])
+    amount = IntegerField(None, [NumberRange(min=0, message="Ruoan määrän tulee olla nollaa suurempi kokonaisluku")])
     energy = IntegerField(None, [Optional()], render_kw={"readonly": ""})
     protein = DecimalField(None, [Optional()], render_kw={"readonly": ""})
     carb = DecimalField(None, [Optional()], render_kw={"readonly": ""})

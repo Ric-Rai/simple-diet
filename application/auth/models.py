@@ -1,4 +1,4 @@
-from application import db, app
+from application import db
 
 
 class User(db.Model):
@@ -9,7 +9,7 @@ class User(db.Model):
     foods = db.relationship("Food", backref='account', lazy='dynamic')
     diets = db.relationship("Diet", backref='account', lazy='dynamic')
 
-    username = db.Column(db.String(144), nullable=False, unique=True)
+    username = db.Column(db.String(144), nullable=False, unique=True, index=True)
     password = db.Column(db.String(144), nullable=False)
     name = db.Column(db.String(144), nullable=False)
     email = db.Column(db.String(144), nullable=False)

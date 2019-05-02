@@ -1,34 +1,31 @@
 {% extends "layout.html" %}
-
 {% block body %}
     <div class="table-wrapper">
         <div class="table-title">
             <div class="row">
-                <div class="col-sm-8"><h2>{{ diet.name }}</h2></div>
-                <div class="col-sm-4">
-                    <button add-url="{{ add_url }}" id="add-meal" type="button" class="btn btn-info add-row">
-                        <i class="fa fa-plus"></i> Uusi ateria
-                    </button>
+                <div class="col-sm-8">
+                    <h2>{{ diet.name }}</h2>
                 </div>
             </div>
         </div>
         <table id="diet" class="table table-bordered" url="{{ url }}">
             <thead>
             <tr>
-                <th scope="col" colspan="2">Ateriat</th>
-                <th scope="col">Energia</th>
-                <th scope="col">Proteiini</th>
-                <th scope="col">Hiilari</th>
-                <th scope="col">Rasva</th>
-                <th scope="col">Toiminnot</th>
+                <th scope="col" colspan="2"></th>
+                <th scope="col">Energia (kcal)</th>
+                <th scope="col">Proteiini (g)</th>
+                <th scope="col">Hiilari (g)</th>
+                <th scope="col">Rasva (g)</th>
+                <th scope="col"></th>
             </tr>
             <tr>
-                <th scope="col" colspan="2"></th>
-                <th scope="col">{{ diet.energy }}</th>
-                <th scope="col">{{ diet.protein }}</th>
-                <th scope="col">{{ diet.carb }}</th>
-                <th scope="col">{{ diet.fat }}</th>
-                <th scope="col"></th>
+                <th scope="col">Ruoka</th>
+                <th scope="col">Määrä (g)</th>
+                <th id="diet-energy" scope="col">{{ diet.energy }}</th>
+                <th id="diet-protein" scope="col">{{ diet.protein }}</th>
+                <th id="diet-carb" scope="col">{{ diet.carb }}</th>
+                <th id="diet-fat" scope="col">{{ diet.fat }}</th>
+                <th scope="col">Toiminnot</th>
             </tr>
             </thead>
             <tbody>
@@ -37,5 +34,12 @@
             {% endfor %}
             </tbody>
         </table>
+        <div class="row">
+            <div class="col">
+                <button add-url="{{ add_url }}" id="add-meal" type="button" class="btn btn-info add-row add-row-diet mt-4">
+                    +&nbsp;&nbsp;Uusi ateria
+                </button>
+            </div>
+        </div>
     </div>
 {% endblock %}

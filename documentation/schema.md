@@ -1,14 +1,14 @@
 ## Tietokanta
 
-Tietokannassa on viisi taulua, joista jokaisella on uniikki id -tunniste. Kaikki taulut ovat normaalimuodossa.e
+Tietokannassa on viisi taulua, joista jokaisella on uniikki id -tunniste. Kaikki taulut ovat normaalimuodossa.
 
 ### Käyttäjät
 
-Account -niminen taulu sisältää käyttäjien tiedot.
+Account -niminen taulu sisältää käyttäjien tiedot. Username-sarake on indeksoitu.
 
 ###  Ruoat
 
-Food -tauluun on tallennettu kaikki ruoat makroravinnetietoineen. Lisäksi ruokiin liittyy käyttäjä, joka on ruoan järjestelmään syöttänyt. Ruoan account_id voi olla myös null, jos ruoka ns. yleinen ruoka järjestelmässä. Yleistä ruokaa voi käyttää osana ruokavaliota, mutta käyttäjillä ei ole oikeuksia niiden muokkaamiseen.
+Food -tauluun on tallennettu kaikki ruoat makroravinnetietoineen. Lisäksi ruokiin liittyy käyttäjä, joka on ruoan järjestelmään syöttänyt. Ruoan account_id voi olla myös null, jos ruoka on ns. yleinen ruoka järjestelmässä. Yleistä ruokaa voi käyttää osana ruokavaliota, mutta käyttäjillä ei ole oikeuksia niiden muokkaamiseen. Ruoka-taulun name-sarake on indeksoitu.
 
 ### Ruokavaliot
 
@@ -26,6 +26,14 @@ MealFood -taulu on liitostaulu, joka liittää ateriat ja ruoat yhteen. Taulu to
 
 ## Tietokantakaavio
 ![Database](db-diagram.png)
+
+<br>
+
+## Tietokantaan liittyvät heikkoudet
+
+Tietokanta on pidetty normaalimuodossa, jotta se olisi rakenteeltaan selkeä ja toisteeton. Joillain denormomalisoinneilla olisi voitu saavuttaa jonkin verran parempi suorituskyky. Erityisesti account_id -sarakkeiden lisääminen Meal- ja MealFood-tauluihin olisi vähentänyt näiden tietokohteiden autentikoinnin yhteydessä tehtävien SQL-kyselyiden määrää.Sovelluksen käyttämä SQLALchemy ORM ei käytä mitään välimuistia sessioiden välillä, joten jokainen HTTP-pyyntö tuottaa uudet kyselyt tietokantaan.
+
+Ylläpidettävyyden ja sovelluksen rakenteen parantamiseksi autentikoinnit toteutettiin mahdollisimman säännönmukaisesti siten, että ne tehdään jokaisen HTTP-pyynnön yhteydessä hyvin samantapaisesti. Erityisesti tässä tilanteessa olisi tarvittu jonkinlaista välimuistitoteutusta, jotta useilta kyselyiltä olisi vältytty. SQLAlchemy tukee joitain olemassaolevia välimuistiratkaisuja, mutta niiden käyttö vaatisi syvempää perehtymistä SQLAlcemyyn ja sen tukemiin välimuistiratkaisuihin.
 
 <br>
 
