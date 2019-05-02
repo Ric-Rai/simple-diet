@@ -31,7 +31,7 @@ MealFood -taulu on liitostaulu, joka liittää ateriat ja ruoat yhteen. Taulu to
 
 ## Tietokantaan liittyvät heikkoudet
 
-Tietokanta on pidetty normaalimuodossa, jotta se olisi rakenteeltaan selkeä ja toisteeton. Joillain denormomalisoinneilla olisi voitu saavuttaa jonkin verran parempi suorituskyky. Erityisesti account_id -sarakkeiden lisääminen Meal- ja MealFood-tauluihin olisi vähentänyt näiden tietokohteiden autentikoinnin yhteydessä tehtävien SQL-kyselyiden määrää.Sovelluksen käyttämä SQLALchemy ORM ei käytä mitään välimuistia sessioiden välillä, joten jokainen HTTP-pyyntö tuottaa uudet kyselyt tietokantaan.
+Tietokanta on pidetty normaalimuodossa, jotta se olisi rakenteeltaan selkeä ja toisteeton. Joillain denormomalisoinneilla olisi voitu saavuttaa jonkin verran parempi suorituskyky. Erityisesti account_id -sarakkeiden lisääminen Meal- ja MealFood-tauluihin olisi vähentänyt näiden tietokohteiden autentikoinnin yhteydessä tehtävien SQL-kyselyiden määrää. Sovelluksen käyttämä SQLALchemy ORM ei käytä mitään välimuistia sessioiden välillä, joten jokainen HTTP-pyyntö tuottaa uudet kyselyt tietokantaan.
 
 Ylläpidettävyyden ja sovelluksen rakenteen parantamiseksi autentikoinnit toteutettiin mahdollisimman säännönmukaisesti siten, että ne tehdään jokaisen HTTP-pyynnön yhteydessä hyvin samantapaisesti. Erityisesti tässä tilanteessa olisi tarvittu jonkinlaista välimuistitoteutusta, jotta useilta kyselyiltä olisi vältytty. SQLAlchemy tukee joitain olemassaolevia välimuistiratkaisuja, mutta niiden käyttö vaatisi syvempää perehtymistä SQLAlcemyyn ja sen tukemiin välimuistiratkaisuihin.
 
