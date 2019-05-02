@@ -26,10 +26,10 @@ function init() {
 }
 
 function calculateMacros($row, $diet) {
-    const $meal = $row.parentsUntil(".meal").parent();
+    const $meal = $row.closest(".meal");
     $.get(document.location, (html) => {
         let $doc = $('<div></div>').append($.parseHTML(html));
-        const $mealRow = $meal.parentsUntil("tr").parent();
+        const $mealRow = $meal.closest("tr");
         const $newMealRow = $doc.find(".data-table[row-id=" + $mealRow.attr("row-id") + "]");
         $meal.find(".meal-energy").html($newMealRow.find(".meal-energy").html());
         $meal.find(".meal-protein").html($newMealRow.find(".meal-protein").html());
@@ -53,7 +53,6 @@ $.fn.dataTable = function () {
             URL = "/" + $table.attr('url'),
             $addRowButton = $(this).find(".add-row:first"),
             editOff = ($inputRow, $row) => {
-                if ($diet.length) calculateMacros($row, $diet);
                 if ($foods.length || $diets.length) {
                     const $inputs = $inputRow.find("input");
                     let hasChanged = false;
@@ -61,6 +60,7 @@ $.fn.dataTable = function () {
                     if (hasChanged) $row.addClass("new-row");
                 }
                 if ($row.eq(0).is("tr")) $inputRow.replaceWith($row);
+                if ($diet.length) calculateMacros($row, $diet);
                 $("#error-row").remove();
                 $addRowButton.removeAttr("disabled");
             },
