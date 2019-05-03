@@ -1,5 +1,5 @@
 # Simple Diet
-Sovellus mahdollistaa yksinkertaisten ruokavalioiden luomisen. Rekisteröitynyt käyttäjä voi lisätä ruokien ravintoainekoostumuksia tietokantaan. Ruokavalio rakennetaan lisäämällä siihen aterioita, jotka puolestaan sisältävät aiemmin tietokantaan syötettyjä ruokia. Jokaista ruokaa on ateriassa tietty grammamäärä.
+Sovellus mahdollistaa yksinkertaisten ruokavalioiden luomisen. Rekisteröitynyt käyttäjä voi lisätä ruokien ravintoainekoostumuksia tietokantaan. Ruokavalio rakennetaan lisäämällä siihen aterioita, jotka puolestaan sisältävät tietokantaan syötettyjä ruokia. Jokaista ruokaa on ateriassa tietty grammamäärä.
 
 
 
