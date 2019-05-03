@@ -69,7 +69,7 @@ Voit avata luomasi ruokavalion painamalla sen nimeä.
 
 Avaa ruokavalio painamalla sen nimeä ruokavaliolistassa. Aloita ruokavalion koostaminen painamalla _Uusi ateria_ -painiketta. Ateria poistetaan _Poista ateria_ -painikkeella.
 
-Ateriaan voit lisätä ruoan painamalla _Lisää ruoka_ -painiketta. Aloita sitten kirjoittamaan haluamasi ruoka-aineen nimeä Ruoka-sarakkeen alla olevaan ensimmäiseen kenttään. Ohjelma ehdottaa sinulle ruokataulukossa olevien ruokien nimiä. Jos ruokaa ei ole vielä lisätty ruokataulukkoon, niin voit siitä huolimatta lisätä sen ruokavalioon ja käydä myöhemmin lisäämässä sen ruokataulukkoon. Ruoan nimen lisäksi tulee ruoalle syöttää sen määrä grammoina ateriassa. Voit poistaa ruoan punaisesta roskakori-ikonista ja muokata ateriaa keltaisesta kynä-ikonista.
+Ateriaan voit lisätä ruoan painamalla _Lisää ruoka_ -painiketta. Aloita sitten kirjoittamaan haluamasi ruoka-aineen nimeä Ruoka-sarakkeen alla olevaan ensimmäiseen kenttään. Ohjelma ehdottaa sinulle ruokataulukossa olevien ruokien nimiä. Jos ruokaa ei ole vielä lisätty ruokataulukkoon, niin voit siitä huolimatta lisätä sen ruokavalioon ja käydä myöhemmin lisäämässä sen ruokataulukkoon. Ruoan nimen lisäksi tulee ruoalle syöttää sen määrä grammoina ateriassa. Voit poistaa ruoan punaisesta roskakori-ikonista tai muokata sitä keltaisesta kynä-ikonista.
 
 Jokaisen aterian ylimmällä rivillä on lihavoidulla teksillä aterian sisältämät ravintoaineet. Koko ruokavalion sisältämät ravintoaineet näet taulukon ylimmältä riviltä.
 

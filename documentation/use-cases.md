@@ -84,8 +84,8 @@ SQL kysely, joka kertoo kuinka monta ateriaa on keskimäärin käyttäjän ruoka
 <pre><code>SELECT AVG(meal_count) FROM (
     SELECT COUNT(*) AS meal_count 
     FROM Meal
-    JOIN Diet ON Meal.diet_id = Diet.id
-    WHERE Diet.account_id = :user_id
+        JOIN Diet ON Meal.diet_id = Diet.id
+      WHERE Diet.account_id = :user_id
     GROUP BY Meal.diet_id 
 ) AS Subquery</code></pre>
 
@@ -108,9 +108,11 @@ FROM (
 
 SQL-kysely, joka kertoo eniten käytetyn ruoan käyttäjän ruokavalioissa:
 
-<pre><code>SELECT Food.name, SUM(Meal_food.amount) AS total FROM Meal_food
-JOIN Food ON Meal_food.food_id = Food.id
-WHERE Food.account_id = :user_id
-GROUP BY Food.name
+<pre><code>SELECT Meal_food._food_name, SUM(Meal_food.amount) AS total
+FROM Meal_food
+       JOIN Meal ON Meal_food.meal_id = Meal.id
+       JOIN Diet on Meal.diet_id = Diet.id
+     WHERE Diet.account_id = :user_id
+GROUP BY meal_food._food_name
 ORDER BY total DESC
 LIMIT 1</code></pre>
